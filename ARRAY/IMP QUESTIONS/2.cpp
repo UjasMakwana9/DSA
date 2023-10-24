@@ -37,6 +37,12 @@ void print(vector<int>& arr, int size)
             j++;
         }
     }
+//     k=k%nums.size();
+        // reverse(nums.begin(),nums.begin()+(nums.size()-k));
+
+        // reverse(nums.begin()+(nums.size()-k),nums.end());   //MOST OPTIMSED
+    
+        // reverse(nums.begin(),nums.end());
 };
 int main()
 {
