@@ -29,8 +29,8 @@ using namespace std;
         
     }
 // Optimal Approach
-// TC : O(n)
-// SC : O(n)
+// TC : O(2n) ==> O(n)
+// SC : O(26)
     char nonRepeatingChar(string &s) {
         // Your code here
         unordered_map<char,int>mpp;
@@ -47,6 +47,40 @@ using namespace std;
         }
         return '$';
         
+    }
+// Most Optimal App.
+// TC : O(n)
+// SC : O(26)
+        char nonRepeatingChar(string &s) {
+        // Your code here
+        vector<int>v(26,-1);
+        int counter = 1;
+        for(int i=0;i<s.size();i++)
+        {                  
+            if(v[s[i]-97]==-1)
+            {
+                v[s[i]-97]=counter;
+                counter++;
+            }
+            else if(v[s[i]-97]!=-1)
+            {
+                v[s[i]-97]=-2;
+            }
+        }
+        
+        int mini = INT_MAX;
+        char index = '$';
+        for(int i=0;i<26;i++)
+        {
+            if(v[i]>0 && v[i]<mini)
+            {
+                mini = v[i];
+                index = char(i+97);
+            }
+            // cout<<v[i]<<" ";
+        }
+        
+        return index;
     }
 int main()
 {
