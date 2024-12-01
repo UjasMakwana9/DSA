@@ -1,5 +1,6 @@
+// https://www.geeksforgeeks.org/batch/gfg-160-problems/track/string-gfg-160/problem/non-repeating-character-1587115620
+// Easy -->No concept learn
 #include<bits/stdc++.h>
-
 
 using namespace std;
 // Brute Force Approach
