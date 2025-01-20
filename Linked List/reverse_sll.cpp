@@ -80,6 +80,22 @@ Node* reverseListRecursive(struct Node* head) {
         
         return ptr;
     }
+
+// Custom it just prints 
+    Node* reverseListCustom(struct Node* head) {
+        // code here
+        if(head->next == NULL)
+        {
+            return head;
+        }
+        
+        Node* ptr = reverseList(head->next);
+        ptr -> next = head;
+        cout<<ptr->data<<" ";
+        ptr = ptr -> next;
+        ptr -> next = NULL;
+        return ptr;
+    }
 int main()
 {
 
