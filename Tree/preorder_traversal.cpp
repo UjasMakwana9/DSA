@@ -14,50 +14,73 @@ public:
         left = right = NULL;
     }
 };
+
 // Time Complexity : O(n)
 // Space Complexity : O(n)
-void inTraversal(vector<int> &v, Node *root)
+void preTraversal(vector<int> &v, Node *root)
 {
     if (root == NULL)
         return;
-    inTraversal(v, root->left);
     v.push_back(root->data);
-    inTraversal(v, root->right);
+    preTraversal(v, root->left);
+    preTraversal(v, root->right);
 }
-vector<int> inOrder(Node *root)
+vector<int> preOrder(Node *root)
 {
     // Your code here
     vector<int> v;
-    inTraversal(v, root);
+    preTraversal(v, root);
     return v;
 }
 
-// Important Part
 // Iterative
 // Time Complexity O(n)
 // Space Complexity O(n)
-vector<int> inOrderTraversal(Node *root)
+vector<int> preOrderTraversal(Node *root)
 {
     if (root == NULL)
         return {-1};
     stack<Node *> st;
     vector<int> v;
-    
-    Node * curr = root;
+    st.push(root);
 
-    while( curr!=NULL || !st.empty()){
-        while(curr!=NULL)
-        {
-            st.push(curr);
-            curr = curr->left;
-        }
-        curr = st.top(); st.pop();
-        v.push_back(curr->data);
-        curr = curr->right;
+    while (!st.empty()) 
+    {
+        Node *temp = st.top();
+        v.push_back(temp->data);
+
+        st.pop();
+        if (temp->right != NULL)
+            st.push(temp->right);
+        if (temp->left != NULL)
+            st.push(temp->left);
     }
     return v;
 }
 
+// With Optimised Space we keep adding the right node only
+vector<int> preOrderTraversal2(Node *root)
+{
+    if (root == NULL)
+        return {-1};
+    stack<Node *> st;
+    vector<int> v;
+    st.push(root);
+    Node *curr = root;
+    while (!st.empty())
+    {
+        while (curr != NULL)
+        {
+            v.push_back(curr->data);
+            if (curr->right != NULL)
+                st.push(curr->right);
+            curr = curr->left;
+        }
+        curr = st.top();
+        st.pop();
+    }
+    return v;
+}
 int main()
 {
     Node *root = new Node(10);
@@ -73,7 +96,7 @@ int main()
     // root->right->left = new Node(70);
     // root->right->right = new Node(80);
 
-    vector<int> v = inOrderTraversal(root);
+    vector<int> v = preOrderTraversal2(root);
     for (auto &it : v)
     {
         cout << it << " ";

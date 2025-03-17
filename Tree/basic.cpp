@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
-
-
 using namespace std;
+
 // Data Structure
 class Node{
     public:
@@ -14,6 +13,7 @@ class Node{
         left = right = NULL;
     }
 };
+
 // Traversal
 // Time Complexity: O(n)
 // Space Complexity: O(n)
@@ -34,6 +34,7 @@ void preOrder(Node * root){
     preOrder(root->left);
     preOrder(root->right);
 }
+
 void postOrder(Node * root){
     if(root == NULL){
         return;
@@ -72,9 +73,6 @@ void printLevelOrder(Node* root) {
         printCurrentLevel(root, i);
 }
 
-
-
-
 // Optimal Solution
 // Time Complexity : O(n)
 // Space Complexity : O(n)
@@ -106,7 +104,29 @@ void printLevelOrder(Node* root) {
         }
         
         return v;
-    }
+}
+
+// Get the size of the tree
+// Time complexity is O(n)
+// Space Complexity is O(h)
+int sizeOfTree(Node * root ){
+    if(root == NULL)
+        return 0;
+    else
+        return 1+sizeOfTree(root->left)+sizeOfTree(root->right);
+
+}
+
+// Maximum in a binary tree
+// Time complexity 
+// space complexity
+int maxValue(Node * root){
+    if(root == NULL)
+        return INT_MIN;
+    else
+        return max(root->data ,max(maxValue(root->left),maxValue(root->right)));
+}
+
 int main()
 {
     Node * root = new Node(10);
@@ -114,7 +134,8 @@ int main()
     Node * temp = new Node(30);
     root->right = temp;
     temp->left = new Node(40);
-    temp->right = new Node(50);
+    temp->right = new Node(501);
+    temp->right->right = new Node(150);
     cout<<"Inorder Traversal: ";
     inOrder(root);
     cout<<endl<<"Preorder Traversal: ";
@@ -124,7 +145,9 @@ int main()
     cout<<endl<<"Height of the Tree: "<<heightofBinaryTree(root);
     cout<<endl<<"Level Order Traversal: ";
     printLevelOrder(root);
-
+    
+    cout<<endl<<"Size of the tree:"<<sizeOfTree(root);
+    cout<<endl<<"Maximum in the tree:"<<maxValue(root);
     
 return 0;
 }
