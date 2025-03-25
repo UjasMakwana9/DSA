@@ -76,35 +76,36 @@ void printLevelOrder(Node* root) {
 // Optimal Solution
 // Time Complexity : O(n)
 // Space Complexity : O(n)
- vector<vector<int>> levelOrder(Node *root) {
-        // code here
-        vector<vector<int>> v;
-        if(root==NULL)
-            return v;
-            
-        queue<Node *>q;
-        q.push(root);
-        v.push_back({root->data});
-        while(q.size()>0)
-        {
-            Node * curr = q.front();
-            q.pop();
-            vector<int>temp;
-            if(curr->left!=NULL)
-            {
-                temp.push_back(curr->left->data);
-                q.push(curr->left);
-            }
-            if(curr->right!=NULL)
-            {
-                temp.push_back(curr->right->data);
-                q.push(curr->right);
-            }
-            v.push_back(temp);
-        }
+// This Code looks good for most case but to handle 
+class Solution {
+    public:
         
-        return v;
-}
+        vector<vector<int>> levelOrder(Node* root) {
+            if(root==NULL)
+                return {};
+            vector<vector<int>>v;
+            queue<Node *>q;
+            q.push(root);
+    
+            while(q.size()>0){
+    
+                vector<int>vec;
+                int sz = q.size();
+                for(int i = 0 ; i<sz;i++){
+                    Node * temp = q.front();
+                    q.pop();
+                    if(temp->left!=NULL)    q.push(temp->left);
+                    if(temp->right!=NULL)    q.push(temp->right);
+                    vec.push_back(temp->data);
+                }
+    
+                if(vec.size()>0)
+                    v.push_back(vec);
+            }
+    
+            return v;
+        }
+    };
 
 // Get the size of the tree
 // Time complexity is O(n)
