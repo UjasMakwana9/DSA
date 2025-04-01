@@ -72,3 +72,43 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
     return vec;
     
 }
+
+// Optimal Time with less space Solution
+// Time complexity O(n)
+// Space complexity O(n)
+vector<vector<int>> zigzagLevelOrder2(TreeNode* root) {
+    if(root == NULL)
+        return {};
+    
+    queue<TreeNode *> que;
+    que.push(root);
+
+    int level = 1;
+    vector<vector<int>>vec;
+
+    while(!que.empty()){
+        int sz = que.size();
+        vector<int>v(sz);
+    
+        for(int i = 0 ; i < sz ; i++ ){
+
+            TreeNode * temp = que.front();
+            que.pop();
+
+            int index = (level%2)!=0 ? i : sz - 1 - i;
+
+            v[index] = temp->val;
+            if(temp->left!=NULL)
+                que.push(temp->left);
+            if(temp->right!=NULL)
+                que.push(temp->right);
+
+        }
+        
+        if(v.size()>0)
+            vec.push_back(v);
+        level++;
+    }
+    return vec;
+    
+}
